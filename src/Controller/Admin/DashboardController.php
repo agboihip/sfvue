@@ -2,8 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\{Carrier, Category, Offer, Order, Product, Shop, User};
-use App\Entity\Model\{Customer,Shipper,Supplier};
+use App\Entity\{Category, Product, User};
 use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Crud,Dashboard,MenuItem,UserMenu};
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -48,18 +47,11 @@ class DashboardController extends AbstractDashboardController
         //if ($this->isGranted('ROLE_ADMIN')) {}
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard'),// yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
-            MenuItem::section('Orders'),
-            MenuItem::linkToCrud('Orders', 'fa fa-shopping-cart', Order::class),
-            MenuItem::linkToCrud('Partners', 'fa fa-bank', Shop::class),
-            MenuItem::linkToCrud('Carriers', 'fa fa-truck', Carrier::class),
             MenuItem::section('Products'),
-            MenuItem::linkToCrud('Offres', 'fa fa-gift', Offer::class),
             MenuItem::linkToCrud('Products', 'fa fa-list', Product::class),
             MenuItem::linkToCrud('Categories', 'fa fa-table', Category::class),
-            MenuItem::section('Users'),
-            MenuItem::linkToCrud('Customers', 'fa fa-user-plus', Customer::class),
-            MenuItem::linkToCrud('Suppliers', 'fa fa-users-gear', Supplier::class),
-            MenuItem::linkToCrud('Shippers', 'fa fa-user-group', Shipper::class),
+            MenuItem::section('Settings'),
+            MenuItem::linkToCrud('Users', 'fa fa-users-gear', User::class),
         ];
     }
 

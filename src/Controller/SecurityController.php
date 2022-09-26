@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     public function register(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm(RegisterFormType::class, $user);
+        $form = $this->createForm(RegisterFormType::class, $user->setRoles(["ROLE_ADMIN"]));
 
         if ($request->isMethod('POST')) {
             $data = $request->request->all($form->getName());
