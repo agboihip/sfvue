@@ -1,0 +1,113 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: API Doc
+            description: This is an awesome app!
+            version: 0.1.0
+        paths:
+            /register:
+                post:
+                    tags: ['Account']
+                    operationId: RegisterId
+                    summary: Create a user account
+                    requestBody:
+                        required: true
+                        description: Register the new user account
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                    responses:
+                        '201':
+                            description: Compte créé avec succès
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object #$ref: '#/components/schemas/Account'
+            /login:
+                post:
+                    tags: ['Account']
+                    operationId: ConnexionId
+                    summary: Login by username and password
+                    requestBody:
+                        required: true
+                        description: Crée un nouveau token JWT
+                        content:
+                            application/x-www-form-urlencoded:
+                                schema:
+                                    $ref: '#/components/schemas/Credentials'
+                    responses:
+                        '401':
+                            description: Invalid credentials
+                        '200':
+                            description: Récupère le token JWT
+                            content:
+                                application/json:
+                                    schema:
+                                        $ref: '#/components/schemas/JWToken'
+            /profile:
+                get:
+                    tags: ['Account']
+                    security:
+                        - bearerAuth: []
+                    operationId: AccountId
+                    summary: Load user details infos
+                    responses:
+                        '200':
+                            description: Récupère le token JWT
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object #$ref: '#/components/schemas/Account'
+            /logout:
+                get:
+                    tags: ['Account']
+                    security:
+                        - cookieAuth: []
+                    operationId: DeconnexionId
+                    summary: Logout from the system.
+                    responses:
+                        '204':
+                            description: OK
+        components:
+            schemas:
+                FileUpload:
+                    type: object
+                    properties:
+                        upload_image_form[file]:
+                            type: string
+                            format: binary
+                JWToken:
+                    type: object
+                    properties:
+                        token:
+                            type: string
+                            readOnly: true
+                        user:
+                            type: object
+                            readOnly: true
+                Credentials:
+                    type: object
+                    properties:
+                        username:
+                            type: string
+                            default: agbohippolyte@gmail.com
+                        password:
+                            type: string
+                            default: password
+                    required: ['password']
+            securitySchemes:
+                bearerAuth:
+                    type: http
+                    scheme: bearer
+                    name: Authorization
+                    bearerFormat: JWT
+                cookieAuth:
+                    type: apiKey
+                    description: 'Set-cookie: BEARER {jwt}'
+                    name: BEARER
+                    in: cookie
+        security: []
+    areas:
+        path_patterns:
+            - ^/api(?!($|/docs))

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile !{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %} <p>ID: {{ app.user.id }}</p> {% endif %}
+    <p>{{ user }}</p>
+
+{% endblock %}
