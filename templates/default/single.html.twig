@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div>
+        <pre>{{ article }}</pre>
+        <add-btn id="{{ article.id }}" name="{{ article.name }}"
+                 :pprix="{{ article.price }}" images="{{ article.images|join }}"/>
+    </div>
+{% endblock %}
+

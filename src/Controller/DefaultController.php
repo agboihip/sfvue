@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
 use App\Utils\Search;
@@ -22,15 +23,23 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    #[Route('/biens', name: 'app_biens')]
+    #[Route('/products', name: 'app_products')]
     public function index(Request $req): Response
     {
         $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+        $form->handleRequest($req);
 
         return $this->render('default/index.html.twig', [
             'articles' => $this->repository->findAllPaginated($req->query->getInt('page', 1),$search),
-            'form' => $this->createForm(SearchType::class, $search)
+            'form' => $form
         ]);
+    }
+
+    #[Route('/products/{id}', name: 'app_product')]
+    public function single(Product $product): Response
+    {
+        return $this->render('default/single.html.twig', ['article' => $product]);
     }
 
     #[Route('/carts', name: 'app_carts')]

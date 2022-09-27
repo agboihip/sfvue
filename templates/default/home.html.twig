@@ -11,15 +11,13 @@
             {% for art in articles %}
             <div class="col">
                 <div class="card">
-                    <img src="{{ asset('uploads/'~ art.images[0]) }}" width="100" class="card-img-top" alt="...">
+                    <a href="{{ path('app_product', {id: art.id}) }}"><img src="{{ asset('uploads/'~ art.images[0]) }}" width="100" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                         <h5 class="card-title">{{ art.name }}</h5>
                         <p class="card-text">{{ art.description|raw }}</p>
                     </div>
-                    <add-btn id="{{ art.id }}"
-                            name="{{ art.name }}"
-                            :pprix="{{ art.price }}"
-                            images="{{ art.images|join }}"/>
+                    <add-btn id="{{ art.id }}" name="{{ art.name }}"
+                            :pprix="{{ art.price }}" images="{{ art.images|join }}"/>
                 </div>
             </div>
             {% endfor %}
