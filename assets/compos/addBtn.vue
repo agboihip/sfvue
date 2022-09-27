@@ -5,11 +5,13 @@
 <script setup>
 import {useCart} from "@/stores";
 
-const obj = defineProps(['id'])
+const obj = defineProps({
+  id: String, name: String, pprix: Number, images: String
+})
 const store = useCart();
 
 const onHandle = () => {
-  console.debug(obj) //store.increase(obj)
+  store.increase(obj)
 }
 </script>
 

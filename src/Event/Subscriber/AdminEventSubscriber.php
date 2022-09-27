@@ -2,7 +2,7 @@
 
 namespace App\Event\Subscriber;
 
-use App\Entity\{Model\Supplier, Product, User};
+use App\Entity\{Product, User};
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
@@ -26,6 +26,6 @@ final class AdminEventSubscriber implements EventSubscriberInterface
     public function setUser(BeforeEntityPersistedEvent  $event)
     {
         $entity = $event->getEntityInstance();
-        if ($this->user instanceof Supplier && $entity instanceof Product) $entity->setOwner($this->user->getEshop());
+        //if ($entity instanceof Product) $entity->setOwner($this->user);
     }
 }

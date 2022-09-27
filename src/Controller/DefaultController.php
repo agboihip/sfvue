@@ -32,4 +32,10 @@ class DefaultController extends AbstractController
             'form' => $this->createForm(SearchType::class, $search)
         ]);
     }
+
+    #[Route('/carts', name: 'app_carts')]
+    public function cart(): Response
+    {
+        return $this->render('default/carts.html.twig');
+    }
 }

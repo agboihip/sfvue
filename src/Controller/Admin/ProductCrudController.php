@@ -26,7 +26,6 @@ class ProductCrudController extends AbstractCrudController
 
             FormField::addPanel('Other information')->setIcon('fa fa-th-list')->addCssClass(''),
             IntegerField::new('stock'),
-            AssociationField::new('owner')->hideOnForm(),
             DateTimeField::new('createdAt')->onlyOnDetail(),
             AssociationField::new('tags'),//->setEntryType(TagType::class)->allowAdd(true)->allowDelete(true)->setEntryIsComplex(false),
 

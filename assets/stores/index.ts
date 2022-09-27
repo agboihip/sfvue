@@ -57,7 +57,7 @@ export const useCart = defineStore('cartStore', {
 
         increase({id, name, pprix, images}: IItem) {
             if (this.cart[id]) this.cart[id].qte += 1;
-            else this.cart[id] = {prId: id, name, qte: 1, prIx: pprix, image: (images||[''])[0]};
+            else this.cart[id] = {prId: id, name, qte: 1, prIx: pprix, image: images};
         },
         decrease(id: number) {
             if (this.cart[id]) {
